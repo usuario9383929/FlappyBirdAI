@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Flappy Bird AI</title>
+<style>
+body {
+  margin: 0;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#game {
+  position: relative;
+  width: 1000px;  /* MAIOR */
+  height: 750px;  /* MAIOR */
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(#70c5ce, #c0f0ff);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#score {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 48px;  /* MAIOR */
+  font-weight: bold;
+  color: white;
+  text-shadow: 3px 3px 6px black;
+  z-index: 100;
+  font-family: Arial, sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div id="game"></div>
+<div id="score">0</div>
+
+<script type="module">
+import { renderMapa } from "./mapa.js";
+import { createPipes } from "./pipes.js";
+import { renderFlappy, jump } from "./flappy.js";
+import { startGameLoop } from "./logic.js";
+
+const game = document.getElementById("game");
+
+// Renderizar
+renderMapa(game);
+createPipes(game);
+renderFlappy(game);
+startGameLoop(game);
+
+// Pulo manual
+document.addEventListener("keydown", e => {
+  if (e.code === "Space") {
+    jump();
+    e.preventDefault();
+  }
+});
+</script>
+
+</body>
+</html>
